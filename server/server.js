@@ -1,9 +1,10 @@
 import express from "express";
 import apiRouter from "./routes/api";
+import cors from "cors";
 
 const app = express();
-const PORT = 3000;
-
+const PORT = 3001;
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // app.use(express.static(__dirname + "/public/"));

@@ -6,9 +6,15 @@ const MainPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("/api/tickets", form).then((res) => {
-      console.log("Ticket submitted:", res.data);
-    });
+    axios
+      .post("/api/tickets", form)
+      .then((res) => {
+        console.log("Ticket submitted:", res.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   };
 
   return (
