@@ -1,9 +1,15 @@
 import express from "express";
-import apiRouter from "./routes/api";
+import apiRouter from "./routes/api.js";
 import cors from "cors";
+import ViteExpress from "vite-express";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.PORT || 3001;
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -27,4 +33,4 @@ app.use((err, req, res, next) => {
   return res.status(errorObj.status).json(errorObj.message);
 });
 
-app.listen(PORT, () => console.log(`Listening on PORT: ${PORT}`));
+ViteExpress.listen(app, PORT, () => console.log(`Listening on PORT: ${PORT}`));

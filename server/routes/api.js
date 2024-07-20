@@ -32,3 +32,5 @@ router.put("/tickets/:id", (req, res) => {
   ticket.response = req.body.response;
   res.json(ticket);
 });
+
+export default router;
