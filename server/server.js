@@ -18,6 +18,14 @@ app.use(express.json());
 //set up the router here for '/
 app.use("/api", apiRouter);
 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static(path.join(__dirname, '../dist')));
+    
+    app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../dist/index.html'));
+    });
+  }
+
 // Unknown route handler
 app.use("*", (req, res) => res.status(404));
 
