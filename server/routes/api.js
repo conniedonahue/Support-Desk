@@ -1,14 +1,14 @@
 import express from "express";
+import { getTickets, addTicket, updateTicket } from "../db/fakeDatabase.js";
 
 const router = express.Router();
 router.use(express.json());
 
-const tickets = [];
 let id = 1;
 
 router.post("/tickets", (req, res) => {
   const ticket = { id: id++, ...req.body, status: "new", response: "" };
-  tickets.push(ticket);
+  addTicket(ticket);
   console.log(
     `Would normally send email here with body: ${JSON.stringify(ticket)}`
   );
@@ -16,21 +16,28 @@ router.post("/tickets", (req, res) => {
 });
 
 router.get("/tickets", (req, res) => {
+  const tickets = getTickets();
   res.json(tickets);
 });
 
-router.get("/tickets/:id", (req, res) => {
-  const ticket = tickets.find((t) => t.id === parseInt(req.params.id));
-  if (!ticket) return res.status(404).send("Ticket not found");
-  res.json(ticket);
-});
+// router.get("/tickets/:id", (req, res) => {
+//   const ticketId = parseInt(req.params.id);
+//   if (!ticketId) return res.status(404).send("Ticket not found");
+//   const ticket = getTicket
+//   res.json(ticket);
+// });
 
 router.put("/tickets/:id", (req, res) => {
-  const ticket = tickets.find((t) => t.id === parseInt(req.params.id));
+  const ticketId = parseInt(req.params.id);
+  const tickets = getTickets();
+  const ticket = tickets.find((t) => t.id === ticketId);
   if (!ticket) return res.status(404).send("Ticket not found");
-  ticket.status = req.body.status;
-  ticket.response = req.body.response;
-  res.json(ticket);
+  const updatedTicket = {
+    status: req.body.status,
+    response: req.body.response,
+  };
+  updateTicket(ticketId, updatedTicket);
+  res.json({ ...ticket, ...updatedTicket });
 });
 
 export default router;
