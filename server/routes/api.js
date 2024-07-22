@@ -1,5 +1,10 @@
 import express from "express";
-import { getTickets, addTicket, updateTicket } from "../db/fakeDatabase.js";
+import {
+  getTickets,
+  getTicket,
+  addTicket,
+  updateTicket,
+} from "../db/fakeDatabase.js";
 
 const router = express.Router();
 router.use(express.json());
@@ -20,12 +25,12 @@ router.get("/tickets", (req, res) => {
   res.json(tickets);
 });
 
-// router.get("/tickets/:id", (req, res) => {
-//   const ticketId = parseInt(req.params.id);
-//   if (!ticketId) return res.status(404).send("Ticket not found");
-//   const ticket = getTicket
-//   res.json(ticket);
-// });
+router.get("/tickets/:id", (req, res) => {
+  const ticketId = parseInt(req.params.id);
+  if (!ticketId) return res.status(404).send("Ticket not found");
+  const ticket = getTicket(ticketId);
+  res.json(Object.values(ticket));
+});
 
 router.put("/tickets/:id", (req, res) => {
   const ticketId = parseInt(req.params.id);

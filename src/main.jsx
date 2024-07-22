@@ -6,6 +6,7 @@ import SubmitTicket from "./routes/SubmitTicket";
 import MainPage from "./routes/MainPage.jsx";
 import AdminPage from "./routes/AdminPage.jsx";
 import ErrorPage from "./routes/ErrorPage.jsx";
+import Ticket from "./routes/Ticket.jsx";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,12 @@ const router = createBrowserRouter([
     path: "/admin",
     element: <AdminPage />,
     errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "tickets/:ticketId",
+        element: <Ticket />,
+      },
+    ],
   },
 ]);
 

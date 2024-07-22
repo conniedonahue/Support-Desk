@@ -3,12 +3,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function AdminPage() {
-  //   const { contacts } = useLoaderData();
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
     axios.get("/api/tickets").then((res) => setTickets(res.data));
   }, []);
+
+  console.log("tickets.length ", Object.keys(tickets).length);
+  console.log("hi");
 
   return (
     <>
@@ -31,7 +33,7 @@ export default function AdminPage() {
           </Form>
         </div>
         <nav>
-          {tickets.length ? (
+          {tickets.length !== 0 ? (
             <ul>
               {tickets.map((ticket) => (
                 <li key={ticket.id}>

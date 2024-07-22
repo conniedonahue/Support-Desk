@@ -24,7 +24,7 @@ const clearCache = () => {
 };
 
 const getTickets = () => {
-  return cache;
+  return Object.values(cache);
 };
 
 const getTicket = (ticketId) => {
