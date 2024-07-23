@@ -48,10 +48,12 @@ router.put("/tickets/:id", (req, res) => {
 
 router.delete("/tickets/:id", (req, res) => {
   const ticketId = parseInt(req.params.id);
-  const tickets = getTickets();
-  if (!tickets[ticketId]) return res.status(404).send("Ticket not found");
+  const ticket = getTicket(ticketId);
+  console.log("ticket:", ticket);
+  if (!ticket) return res.status(404).send("Ticket not found");
   deleteTicket(ticketId);
-  return res.status(200);
+  console.log(getTickets());
+  return res.status(200).json({ message: "Ticket deleted successfully" });
 });
 
 export default router;

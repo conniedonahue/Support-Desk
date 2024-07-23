@@ -44,7 +44,7 @@ const updateTicket = (id, updatedTicket) => {
 };
 
 const deleteTicket = (ticketId) => {
-  if (cache[ticketId]) delete cache.ticketId;
+  if (cache[ticketId]) delete cache[ticketId];
 };
 
 export {

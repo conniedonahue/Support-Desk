@@ -27,6 +27,7 @@ const router = createBrowserRouter([
       {
         path: "tickets/:ticketId/destroy",
         action: destroyAction,
+        errorElement: <div>Oops! There was an error.</div>,
       },
     ],
   },

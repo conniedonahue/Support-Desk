@@ -20,18 +20,18 @@ export default function Ticket() {
     return <div>Loading...</div>;
   }
 
-  const handleDelete = (e) => {
-    e.preventDefault();
-    axios
-      .delete(`/api/tickets/${ticketId}`)
-      .then((res) => {
-        console.log("response");
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
-  };
+//   const handleDelete = (e) => {
+//     e.preventDefault();
+//     axios
+//       .delete(`/api/tickets/${ticketId}`)
+//       .then((res) => {
+//         console.log(res);
+//       })
+//       .catch(function (error) {
+//         // handle error
+//         console.log(error);
+//       });
+//   };
 
   return (
     <div id="ticket">
@@ -52,18 +52,18 @@ export default function Ticket() {
           <Form action="edit">
             <button type="submit">Edit</button>
           </Form>
-          <form
+          <Form
             method="delete"
-            // action="destroy"
+            action="destroy"
             onSubmit={(event) => {
               if (!confirm("Please confirm you want to delete this ticket.")) {
                 event.preventDefault();
-                event.handleDelete();
+                // handleDelete();
               }
             }}
           >
             <button type="submit">Delete</button>
-          </form>
+          </Form>
         </div>
       </div>
     </div>

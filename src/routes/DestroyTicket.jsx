@@ -2,14 +2,14 @@ import { redirect } from "react-router-dom";
 import axios from "axios";
 
 export async function action({ params }) {
-  console.log("params", params);
-  axios
-    .delete("/api/tickets/{params}")
-    .then(() => {
-      return redirect("/admin/");
-    })
-    .catch(function (error) {
-      // handle error
-      console.log(error);
-    });
+  const ticketId = params.ticketId;
+
+  try {
+    await axios.delete(`/api/tickets/${ticketId}`);
+    console.log("post axios");
+    return redirect("/admin");
+  } catch (error) {
+    console.error("Error deleting ticket:", error);
+    return redirect("/admin");
+  }
 }
