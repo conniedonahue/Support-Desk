@@ -16,11 +16,22 @@ export default function Ticket() {
     axios.get(`/api/tickets/${ticketId}`).then((res) => setTicket(res.data));
   }, [ticketId]);
 
-  console.log("ticket", ticket);
-
   if (!ticket) {
     return <div>Loading...</div>;
   }
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    axios
+      .delete(`/api/tickets/${ticketId}`)
+      .then((res) => {
+        console.log("response");
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
+  };
 
   return (
     <div id="ticket">
@@ -41,17 +52,18 @@ export default function Ticket() {
           <Form action="edit">
             <button type="submit">Edit</button>
           </Form>
-          <Form
-            method="post"
-            action="destroy"
+          <form
+            method="delete"
+            // action="destroy"
             onSubmit={(event) => {
               if (!confirm("Please confirm you want to delete this ticket.")) {
                 event.preventDefault();
+                event.handleDelete();
               }
             }}
           >
             <button type="submit">Delete</button>
-          </Form>
+          </form>
         </div>
       </div>
     </div>

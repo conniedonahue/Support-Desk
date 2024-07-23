@@ -4,6 +4,7 @@ import {
   getTicket,
   addTicket,
   updateTicket,
+  deleteTicket,
 } from "../db/fakeDatabase.js";
 
 const router = express.Router();
@@ -29,13 +30,13 @@ router.get("/tickets/:id", (req, res) => {
   const ticketId = parseInt(req.params.id);
   if (!ticketId) return res.status(404).send("Ticket not found");
   const ticket = getTicket(ticketId);
-  res.json(Object.values(ticket));
+  res.json(ticket);
 });
 
 router.put("/tickets/:id", (req, res) => {
   const ticketId = parseInt(req.params.id);
   const tickets = getTickets();
-  const ticket = tickets.find((t) => t.id === ticketId);
+  const ticket = tickets[ticketId];
   if (!ticket) return res.status(404).send("Ticket not found");
   const updatedTicket = {
     status: req.body.status,
@@ -43,6 +44,14 @@ router.put("/tickets/:id", (req, res) => {
   };
   updateTicket(ticketId, updatedTicket);
   res.json({ ...ticket, ...updatedTicket });
+});
+
+router.delete("/tickets/:id", (req, res) => {
+  const ticketId = parseInt(req.params.id);
+  const tickets = getTickets();
+  if (!tickets[ticketId]) return res.status(404).send("Ticket not found");
+  deleteTicket(ticketId);
+  return res.status(200);
 });
 
 export default router;

@@ -19,11 +19,14 @@ app.use(express.json());
 app.use("/api", apiRouter);
 
 if (process.env.NODE_ENV === "production") {
+  ViteExpress.config({ mode: "production" });
   app.use(express.static(path.join(__dirname, "../dist")));
 
   app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../dist/index.html"));
   });
+} else {
+  ViteExpress.config({ mode: "development" });
 }
 
 // Unknown route handler

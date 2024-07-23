@@ -43,4 +43,15 @@ const updateTicket = (id, updatedTicket) => {
   }
 };
 
-export { getTickets, getTicket, addTicket, updateTicket, clearCache };
+const deleteTicket = (ticketId) => {
+  if (cache[ticketId]) delete cache.ticketId;
+};
+
+export {
+  getTickets,
+  getTicket,
+  addTicket,
+  updateTicket,
+  clearCache,
+  deleteTicket,
+};

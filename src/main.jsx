@@ -7,6 +7,7 @@ import MainPage from "./routes/MainPage.jsx";
 import AdminPage from "./routes/AdminPage.jsx";
 import ErrorPage from "./routes/ErrorPage.jsx";
 import Ticket from "./routes/Ticket.jsx";
+import { action as destroyAction } from "./routes/DestroyTicket.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
       {
         path: "tickets/:ticketId",
         element: <Ticket />,
+      },
+      {
+        path: "tickets/:ticketId/destroy",
+        action: destroyAction,
       },
     ],
   },
