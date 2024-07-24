@@ -22,7 +22,7 @@ router.get("/tickets/:id", (req, res) => {
   res.json(ticket);
 });
 
-// Using simple counter as key for hashmap fakeDatabase. 
+// Using simple counter as key for hashmap fakeDatabase.
 let id = 1;
 
 router.post("/tickets", (req, res) => {
@@ -49,10 +49,8 @@ router.put("/tickets/:id", (req, res) => {
 router.delete("/tickets/:id", (req, res) => {
   const ticketId = parseInt(req.params.id);
   const ticket = getTicket(ticketId);
-  console.log("ticket:", ticket);
   if (!ticket) return res.status(404).send("Ticket not found");
   deleteTicket(ticketId);
-  console.log(getTickets());
   return res.status(200).json({ message: "Ticket deleted successfully" });
 });
 
