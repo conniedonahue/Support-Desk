@@ -214,6 +214,59 @@ i {
   color: hsl(224, 98%, 58%);
 }
 
+/* MainPage */
+
+#MainPage-root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.mainPage-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.ticket-submit-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.ticket-submit-form label {
+  margin-bottom: 1em;
+  text-align: left;
+}
+
+.ticket-submit-form span {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.ticket-submit-form input,
+.ticket-submit-form textarea {
+  width: 100%;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.ticket-submit-form button {
+  padding: 0.5em;
+  font-size: 1em;
+}
+
+.ticket-submit-form button:hover {
+  background-color: #0056b3;
+  color: white;
+}
+
 #detail {
   flex: 1;
   padding: 2rem 4rem;
@@ -279,8 +332,69 @@ i {
   background-color: #0056b3;
 }
 
+.respond-button {
+  color: green;
+}
+.respond-button:hover {
+  background-color: darkgreen;
+}
+
 .delete-button:hover {
   background-color: #880512;
+}
+
+#response-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  width: 100%; /* Ensure the form takes up the full width */
+}
+
+#response-form h1 {
+  font-size: 1.5em;
+  margin-bottom: 1em;
+}
+
+#response-form p {
+  margin: 0;
+}
+
+#response-form p span {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5em; /* Space between label and textarea */
+}
+
+#response-form textarea {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  resize: vertical; /* Allows vertical resizing */
+}
+
+#response-form button {
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  color: #007bff;
+  background-color: white; /* Default color for primary button */
+}
+
+#response-form button:hover {
+  background-color: #0056b3; /* Darker shade for hover effect */
+}
+
+#response-form button.cancel-button {
+  color: #b72c3a;
+  background-color: white; /* Color for cancel button */
+}
+
+#response-form button.cancel-button:hover {
+  background-color: #880512; /* Darker shade for cancel button on hover */
 }
 
 #zero-state {

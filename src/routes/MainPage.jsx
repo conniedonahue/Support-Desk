@@ -22,31 +22,44 @@ const MainPage = () => {
   };
 
   return (
-    <div>
+    <div id="MainPage-root" className="mainPage-container">
       <h1>Submit a Ticket</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
-          placeholder="Name"
-          required
-        />
-        <input
-          type="email"
-          value={form.email}
-          onChange={(e) => setForm({ ...form, email: e.target.value })}
-          placeholder="Email"
-          required
-        />
-        <textarea
-          value={form.description}
-          onChange={(e) => setForm({ ...form, description: e.target.value })}
-          placeholder="Description"
-          required
-        />
+      <form onSubmit={handleSubmit} className="ticket-submit-form">
+        <label>
+          <span>Name: </span>
+          <input
+            type="text"
+            value={form.name}
+            onChange={(e) => setForm({ ...form, name: e.target.value })}
+            placeholder="Name"
+            required
+          />
+        </label>
+
+        <label>
+          <span> Email: </span>
+          <input
+            type="email"
+            value={form.email}
+            onChange={(e) => setForm({ ...form, email: e.target.value })}
+            placeholder="Email"
+            required
+          />
+        </label>
+
+        <label>
+          <span>Description: </span>
+          <textarea
+            value={form.description}
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+            placeholder="Description"
+            required
+          />
+        </label>
+
         <button type="submit">Submit</button>
       </form>
+
       {submitted && (
         <p>Ticket submitted! Support will reach out to you soon!</p>
       )}

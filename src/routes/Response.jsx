@@ -17,7 +17,7 @@ export default function Response() {
   };
 
   return (
-    <Form method="post" id="contact-form">
+    <Form method="post" id="response-form">
       <h1>{ticket.name} </h1>
       <p>
         <span>Email Body</span>
@@ -34,7 +34,7 @@ export default function Response() {
       </p>
       <p>
         <button type="submit">Send</button>
-        <button type="button" onClick={handleCancel}>
+        <button type="button" className="cancel-button" onClick={handleCancel}>
           Cancel
         </button>
       </p>

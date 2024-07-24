@@ -65,7 +65,7 @@ export default function Ticket() {
             </button>
           </Form>
           <Form action="respond">
-            <button type="submit" className="edit-button">
+            <button type="submit" className="respond-button">
               Respond
             </button>
           </Form>
