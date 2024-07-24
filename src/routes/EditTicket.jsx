@@ -1,4 +1,4 @@
-import { Form, useLoaderData, redirect } from "react-router-dom";
+import { Form, useLoaderData, redirect, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export async function action({ request, params }) {
@@ -11,10 +11,14 @@ export async function action({ request, params }) {
 
 export default function EditTicket() {
   const ticket = useLoaderData();
-  console.log("editor, ", ticket);
+  const navigate = useNavigate();
+
+  const handleCancel = () => {
+    navigate(`/admin/tickets/${ticket.id}`);
+  };
 
   return (
-    <Form method="post" id="contact-form">
+    <Form method="post" id="edit-ticket-form">
       <p>
         <span>Name</span>
         <input
@@ -36,18 +40,11 @@ export default function EditTicket() {
       </p>
       <label>
         <span>Status</span>
-        <input type="radio" id="new" name="new" value="new" />
-        <label htmlFor="newStatus"> New </label> <br />
-        <input
-          type="radio"
-          id="in-progress"
-          name="in-progress"
-          value="in-progress"
-        />
-        <label htmlFor="inProgressStatus"> In progress </label>
-        <br />
-        <input type="radio" id="resolved" name="resolved" value="resolved" />
-        <label htmlFor="resolvedStatus"> Resolved </label>
+        <select name="status" defaultValue={ticket?.status}>
+          <option value="NEW">New</option>
+          <option value="IN PROGRESS">In Progress</option>
+          <option value="RESOLVED">Resolved</option>
+        </select>
       </label>
 
       <label>
@@ -60,7 +57,9 @@ export default function EditTicket() {
       </label>
       <p>
         <button type="submit">Save</button>
-        <button type="button">Cancel</button>
+        <button type="button" onClick={handleCancel}>
+          Cancel
+        </button>
       </p>
     </Form>
   );

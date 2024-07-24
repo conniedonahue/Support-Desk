@@ -7,6 +7,7 @@ import {
   redirect,
 } from "react-router-dom";
 import "../index.css";
+import axios from "axios";
 // import { useEffect, useState } from "react";
 // import axios from "axios";
 
@@ -20,6 +21,15 @@ import "../index.css";
 //     return redirect("/admin");
 //   }
 // }
+
+export async function action() {
+  const ticket = await axios.post("/api/tickets/", {
+    name: "New Ticket",
+    email: "",
+    description: "",
+  });
+  return { ticket };
+}
 
 export default function AdminPage() {
   // const [tickets, setTickets] = useState([]);
@@ -35,7 +45,7 @@ export default function AdminPage() {
       <div id="sidebar">
         <h1>Support Tickets</h1>
         <div>
-          <form id="search-form" role="search">
+          {/* <form id="search-form" role="search">
             <input
               id="q"
               aria-label="Search tickets"
@@ -45,9 +55,9 @@ export default function AdminPage() {
             />
             <div id="search-spinner" aria-hidden hidden={true} />
             <div className="sr-only" aria-live="polite"></div>
-          </form>
+          </form> */}
           <Form method="post">
-            <button type="submit">New</button>
+            <button type="submit">New Ticket</button>
           </Form>
         </div>
         <nav>

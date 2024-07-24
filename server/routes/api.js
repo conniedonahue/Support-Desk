@@ -13,7 +13,7 @@ router.use(express.json());
 let id = 1;
 
 router.post("/tickets", (req, res) => {
-  const ticket = { id: id++, ...req.body, status: "new", response: "" };
+  const ticket = { id: id++, ...req.body, status: "NEW" };
   addTicket(ticket);
   console.log(
     `Would normally send email here with body: ${JSON.stringify(ticket)}`

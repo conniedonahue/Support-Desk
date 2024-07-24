@@ -49,15 +49,24 @@ export default function Ticket() {
             </p>
           </>
         )}
-
-        {ticket.description && <p>{ticket.description}</p>}
-
         {ticket.status && <p>Status: {ticket.status}</p>}
+
+        {ticket.description && (
+          <>
+            <p>Description: </p>
+            <p>{ticket.description}</p>
+          </>
+        )}
 
         <div className="button-group">
           <Form action="edit">
             <button type="submit" className="edit-button">
               Edit
+            </button>
+          </Form>
+          <Form action="respond">
+            <button type="submit" className="edit-button">
+              Respond
             </button>
           </Form>
           <Form
