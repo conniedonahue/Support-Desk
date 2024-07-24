@@ -1,11 +1,9 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const MainPage = () => {
   const [form, setForm] = useState({ name: "", email: "", description: "" });
   const [submitted, setSubmitted] = useState(false);
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +13,6 @@ const MainPage = () => {
       setForm({ name: "", email: "", description: "" });
       setSubmitted(true);
       setTimeout(() => setSubmitted(false), 3000);
-      navigate("/");
     } catch (error) {
       console.log(error);
     }

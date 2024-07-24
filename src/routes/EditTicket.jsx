@@ -30,6 +30,7 @@ export default function EditTicket() {
         />
       </p>
       <p>
+        <span>Email</span>
         <input
           placeholder="Email"
           aria-label="Email"
@@ -41,9 +42,9 @@ export default function EditTicket() {
       <label>
         <span>Status</span>
         <select name="status" defaultValue={ticket?.status}>
-          <option value="NEW">New</option>
-          <option value="IN PROGRESS">In Progress</option>
-          <option value="RESOLVED">Resolved</option>
+          <option value="NEW">NEW</option>
+          <option value="IN PROGRESS">IN PROGRESS</option>
+          <option value="RESOLVED">RESOLVED</option>
         </select>
       </label>
 
@@ -57,7 +58,7 @@ export default function EditTicket() {
       </label>
       <p>
         <button type="submit">Save</button>
-        <button type="button" onClick={handleCancel}>
+        <button type="button" className="cancel-button" onClick={handleCancel}>
           Cancel
         </button>
       </p>

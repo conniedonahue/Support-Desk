@@ -4,23 +4,9 @@ import {
   useNavigation,
   useLoaderData,
   Form,
-  redirect,
 } from "react-router-dom";
 import "../index.css";
 import axios from "axios";
-// import { useEffect, useState } from "react";
-// import axios from "axios";
-
-// export async function loader() {
-//   try {
-//     const tickets = await axios.get(`/api/tickets/`);
-//     console.log("tickets", tickets.data);
-//     return tickets.data;
-//   } catch (error) {
-//     console.error("Error loading tickets:", error);
-//     return redirect("/admin");
-//   }
-// }
 
 export async function action() {
   const ticket = await axios.post("/api/tickets/", {
@@ -32,30 +18,14 @@ export async function action() {
 }
 
 export default function AdminPage() {
-  // const [tickets, setTickets] = useState([]);
   const navigation = useNavigation();
   const tickets = useLoaderData();
-
-  // useEffect(() => {
-  //   axios.get("/api/tickets").then((res) => setTickets(res.data));
-  // }, []);
 
   return (
     <>
       <div id="sidebar">
         <h1>Support Tickets</h1>
         <div>
-          {/* <form id="search-form" role="search">
-            <input
-              id="q"
-              aria-label="Search tickets"
-              placeholder="Search"
-              type="search"
-              name="q"
-            />
-            <div id="search-spinner" aria-hidden hidden={true} />
-            <div className="sr-only" aria-live="polite"></div>
-          </form> */}
           <Form method="post">
             <button type="submit">New Ticket</button>
           </Form>

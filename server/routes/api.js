@@ -10,17 +10,6 @@ import {
 const router = express.Router();
 router.use(express.json());
 
-let id = 1;
-
-router.post("/tickets", (req, res) => {
-  const ticket = { id: id++, ...req.body, status: "NEW" };
-  addTicket(ticket);
-  console.log(
-    `Would normally send email here with body: ${JSON.stringify(ticket)}`
-  );
-  res.status(201).json(ticket);
-});
-
 router.get("/tickets", (req, res) => {
   const tickets = getTickets();
   res.json(tickets);
@@ -31,6 +20,16 @@ router.get("/tickets/:id", (req, res) => {
   if (!ticketId) return res.status(404).send("Ticket not found");
   const ticket = getTicket(ticketId);
   res.json(ticket);
+});
+
+// Using simple counter as key for hashmap fakeDatabase. 
+let id = 1;
+
+router.post("/tickets", (req, res) => {
+  const ticket = { id: id++, ...req.body, status: "NEW" };
+  addTicket(ticket);
+  console.log(`Ticket added to fake database: ${JSON.stringify(ticket)}`);
+  res.status(201).json(ticket);
 });
 
 router.put("/tickets/:id", (req, res) => {

@@ -1,10 +1,9 @@
 import { Form, useLoaderData, redirect, useNavigate } from "react-router-dom";
-import { getTicket } from "../../server/db/fakeDatabase";
 
 export async function action({ request, params }) {
   const formData = await request.formData();
   const { response, email } = Object.fromEntries(formData);
-  console.log(response, email);
+  console.log(`Sent the following response to ${email}: ${response}`);
   return redirect(`/admin/tickets/${params.ticketId}`);
 }
 

@@ -2,10 +2,6 @@ let cache = {};
 let writeTimeout = null;
 const WRITE_DELAY = 1000;
 
-// const readData = () => {
-//   return cache;
-// };
-
 const writeData = (newData) => {
   if (writeTimeout) {
     clearTimeout(writeTimeout);

@@ -2,17 +2,16 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./index.css";
-import SubmitTicket from "./routes/SubmitTicket";
 import MainPage from "./routes/MainPage.jsx";
+import ErrorPage from "./routes/ErrorPage.jsx";
+import Ticket from "./routes/Ticket.jsx";
 import AdminPage, { action as adminAction } from "./routes/AdminPage.jsx";
 import EditTicket, { action as editAction } from "./routes/EditTicket.jsx";
 import Response, { action as responseAction } from "./routes/Response.jsx";
+import { action as destroyAction } from "./routes/DestroyTicket.jsx";
 import { loader as responseLoader } from "./loaders/responseLoader.js";
 import { loader as adminPageLoader } from "./loaders/adminPageLoader.js";
 import { loader as editLoader } from "./loaders/editPageLoader.js";
-import ErrorPage from "./routes/ErrorPage.jsx";
-import Ticket from "./routes/Ticket.jsx";
-import { action as destroyAction } from "./routes/DestroyTicket.jsx";
 
 const router = createBrowserRouter([
   {

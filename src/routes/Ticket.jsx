@@ -3,12 +3,6 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 export default function Ticket() {
-  //   const ticket = {
-  //     name: "name",
-  //     email: "email",
-  //     description: "description",
-  //   };
-
   const { ticketId } = useParams();
   const [ticket, setTicket] = useState(null);
 
@@ -20,19 +14,6 @@ export default function Ticket() {
     return <div>Loading...</div>;
   }
 
-  //   const handleDelete = (e) => {
-  //     e.preventDefault();
-  //     axios
-  //       .delete(`/api/tickets/${ticketId}`)
-  //       .then((res) => {
-  //         console.log(res);
-  //       })
-  //       .catch(function (error) {
-  //         // handle error
-  //         console.log(error);
-  //       });
-  //   };
-
   return (
     <div id="ticket">
       <div>
@@ -40,21 +21,27 @@ export default function Ticket() {
 
         {ticket.email && (
           <>
-            <p>
+            <p className="bold-label">
               {" "}
-              Email address:{" "}
+              Email:{" "}
               <a target="_blank" href={`mailto:${ticket.email}`}>
                 {ticket.email}
               </a>
             </p>
           </>
         )}
-        {ticket.status && <p>Status: {ticket.status}</p>}
+        {ticket.status && (
+          <p className="bold-label">
+            Status: <span className="answered-field"> {ticket.status} </span>
+          </p>
+        )}
+
+        <br></br>
 
         {ticket.description && (
           <>
-            <p>Description: </p>
-            <p>{ticket.description}</p>
+            <p className="bold-label">Description: </p>
+            <p className="answered-field">{ticket.description}</p>
           </>
         )}
 
@@ -75,7 +62,6 @@ export default function Ticket() {
             onSubmit={(event) => {
               if (!confirm("Please confirm you want to delete this ticket.")) {
                 event.preventDefault();
-                // handleDelete();
               }
             }}
           >
