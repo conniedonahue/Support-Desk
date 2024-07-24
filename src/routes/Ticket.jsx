@@ -20,18 +20,18 @@ export default function Ticket() {
     return <div>Loading...</div>;
   }
 
-//   const handleDelete = (e) => {
-//     e.preventDefault();
-//     axios
-//       .delete(`/api/tickets/${ticketId}`)
-//       .then((res) => {
-//         console.log(res);
-//       })
-//       .catch(function (error) {
-//         // handle error
-//         console.log(error);
-//       });
-//   };
+  //   const handleDelete = (e) => {
+  //     e.preventDefault();
+  //     axios
+  //       .delete(`/api/tickets/${ticketId}`)
+  //       .then((res) => {
+  //         console.log(res);
+  //       })
+  //       .catch(function (error) {
+  //         // handle error
+  //         console.log(error);
+  //       });
+  //   };
 
   return (
     <div id="ticket">
@@ -39,18 +39,26 @@ export default function Ticket() {
         <h1>{ticket.name ? <>{ticket.name}</> : <i>No Name</i>} </h1>
 
         {ticket.email && (
-          <p>
-            <a target="_blank" href={`mailto:${ticket.email}`}>
-              {ticket.email}
-            </a>
-          </p>
+          <>
+            <p>
+              {" "}
+              Email address:{" "}
+              <a target="_blank" href={`mailto:${ticket.email}`}>
+                {ticket.email}
+              </a>
+            </p>
+          </>
         )}
 
         {ticket.description && <p>{ticket.description}</p>}
 
-        <div>
+        {ticket.status && <p>Status: {ticket.status}</p>}
+
+        <div className="button-group">
           <Form action="edit">
-            <button type="submit">Edit</button>
+            <button type="submit" className="edit-button">
+              Edit
+            </button>
           </Form>
           <Form
             method="delete"
@@ -62,7 +70,9 @@ export default function Ticket() {
               }
             }}
           >
-            <button type="submit">Delete</button>
+            <button type="submit" className="delete-button">
+              Delete
+            </button>
           </Form>
         </div>
       </div>

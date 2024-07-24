@@ -6,6 +6,7 @@ import {
   Form,
   redirect,
 } from "react-router-dom";
+import "../index.css";
 // import { useEffect, useState } from "react";
 // import axios from "axios";
 

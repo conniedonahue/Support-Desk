@@ -36,11 +36,12 @@ const addTicket = (ticket) => {
   writeData(ticket);
 };
 
-const updateTicket = (id, updatedTicket) => {
-  if (cache[id]) {
-    cache[id] = { ...cache[id], ...updatedTicket };
-    writeData(updatedTicket);
+const updateTicket = (ticketId, newInfo) => {
+  if (cache[ticketId]) {
+    cache[ticketId] = { ...cache[ticketId], ...newInfo };
+    writeData(newInfo);
   }
+  return cache[ticketId];
 };
 
 const deleteTicket = (ticketId) => {

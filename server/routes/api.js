@@ -35,15 +35,16 @@ router.get("/tickets/:id", (req, res) => {
 
 router.put("/tickets/:id", (req, res) => {
   const ticketId = parseInt(req.params.id);
-  const tickets = getTickets();
-  const ticket = tickets[ticketId];
+  const ticket = getTicket(ticketId);
   if (!ticket) return res.status(404).send("Ticket not found");
-  const updatedTicket = {
+  const newInfo = {
+    name: req.body.name,
+    email: req.body.email,
     status: req.body.status,
-    response: req.body.response,
+    description: req.body.description,
   };
-  updateTicket(ticketId, updatedTicket);
-  res.json({ ...ticket, ...updatedTicket });
+  const updatedTicket = updateTicket(ticketId, newInfo);
+  res.json(updatedTicket);
 });
 
 router.delete("/tickets/:id", (req, res) => {
