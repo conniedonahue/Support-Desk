@@ -1,20 +1,24 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const MainPage = () => {
   const [form, setForm] = useState({ name: "", email: "", description: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    axios
-      .post("/api/tickets", form)
-      .then((res) => {
-        console.log("Ticket submitted:", res.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.log(error);
-      });
+    try {
+      const res = await axios.post("/api/tickets", form);
+      console.log("Ticket submitted:", res.data);
+      setForm({ name: "", email: "", description: "" });
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 3000);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -43,6 +47,9 @@ const MainPage = () => {
         />
         <button type="submit">Submit</button>
       </form>
+      {submitted && (
+        <p>Ticket submitted! Support will reach out to you soon!</p>
+      )}
     </div>
   );
 };
