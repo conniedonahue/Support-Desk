@@ -1,16 +1,33 @@
-import { Outlet, Link, useLoaderData, Form } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import {
+  Outlet,
+  NavLink,
+  useNavigation,
+  useLoaderData,
+  Form,
+  redirect,
+} from "react-router-dom";
+// import { useEffect, useState } from "react";
+// import axios from "axios";
+
+// export async function loader() {
+//   try {
+//     const tickets = await axios.get(`/api/tickets/`);
+//     console.log("tickets", tickets.data);
+//     return tickets.data;
+//   } catch (error) {
+//     console.error("Error loading tickets:", error);
+//     return redirect("/admin");
+//   }
+// }
 
 export default function AdminPage() {
-  const [tickets, setTickets] = useState([]);
+  // const [tickets, setTickets] = useState([]);
+  const navigation = useNavigation();
+  const tickets = useLoaderData();
 
-  useEffect(() => {
-    axios.get("/api/tickets").then((res) => setTickets(res.data));
-  }, []);
-
-  console.log("tickets.length ", Object.keys(tickets).length);
-  console.log("hi");
+  // useEffect(() => {
+  //   axios.get("/api/tickets").then((res) => setTickets(res.data));
+  // }, []);
 
   return (
     <>
@@ -37,9 +54,14 @@ export default function AdminPage() {
             <ul>
               {tickets.map((ticket) => (
                 <li key={ticket.id}>
-                  <Link to={`tickets/${ticket.id}`}>
+                  <NavLink
+                    to={`tickets/${ticket.id}`}
+                    className={({ isActive, isPending }) =>
+                      isActive ? "active" : isPending ? "pending" : ""
+                    }
+                  >
                     {ticket.name ? <>{ticket.name}</> : <i>No Name</i>}{" "}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
@@ -50,7 +72,10 @@ export default function AdminPage() {
           )}
         </nav>
       </div>
-      <div id="detail">
+      <div
+        id="detail"
+        className={navigation.state === "loading" ? "loading" : ""}
+      >
         <Outlet />
       </div>
     </>

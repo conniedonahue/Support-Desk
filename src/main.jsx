@@ -5,6 +5,7 @@ import "./index.css";
 import SubmitTicket from "./routes/SubmitTicket";
 import MainPage from "./routes/MainPage.jsx";
 import AdminPage from "./routes/AdminPage.jsx";
+import { loader as adminPageLoader } from "./loaders/adminPageLoader.js";
 import ErrorPage from "./routes/ErrorPage.jsx";
 import Ticket from "./routes/Ticket.jsx";
 import { action as destroyAction } from "./routes/DestroyTicket.jsx";
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
     path: "/admin",
     element: <AdminPage />,
     errorElement: <ErrorPage />,
+    loader: adminPageLoader,
     children: [
       {
         path: "tickets/:ticketId",
