@@ -6,7 +6,6 @@ export async function action({ params }) {
 
   try {
     await axios.delete(`/api/tickets/${ticketId}`);
-    console.log("post axios");
     return redirect("/admin");
   } catch (error) {
     console.error("Error deleting ticket:", error);
