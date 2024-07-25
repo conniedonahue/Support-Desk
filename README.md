@@ -25,29 +25,29 @@ Be sure to check out the admin page at `https://support-desk-delta.vercel.app/ad
 
 The frontend is built in React with React Router, this allows:
 
-- Dynamic routing: this enables flexibility in routing based on application state, being able to quickly act differently depending on parameters like `:ticketId`.
+- Dynamic routing which enables flexibility based on application state. The app can quickly respond to changes in state through different parameters like `:ticketId`.
 - Data loading that fetches data required for rendering before they are displayed.
-- Hierarchical routing: all of the routes with their corresponding actions and loaders are nested within the main.jsx component, giving devs a birds-eye view of the entire front end.
+- Hierarchical routing: all of the routes with their corresponding actions and loaders are nested within the main.jsx component, giving devs a birds-eye view of the entire frontend.
 
 Some other front end notes:
 
-- I implemented a sidebar in the admin page for easy access to all of the tickets, and I put the current ticket as an outlet -- allowing for quick manipulation of tickets.
+- I implemented a sidebar in the admin page for easy access to all of the tickets, and I put the current ticket as an outlet to quickly manipulate the selected ticket.
 - In this current implementation, "Respond" button just logs the response message to the console. Ideally, this would be an email and with a record of past interactions.
-- The front end is missing any idempotence enforcement or rate limiting / throttling.
+- The frontend is missing any idempotence enforcement or rate limiting / throttling.
 
 ### Backend
 
 The backend is built in Node/Express and uses an in-memory cache as a fake database.
 
 - I designed the cache as a hashmap to allow for constant lookup of tickets based on `ticketId`.
-- For actual deployment, I might mirror this as a key:value database like AWS DynamoDB.
+- For real-life deployment, I might mirror this as a key:value database like AWS DynamoDB.
 - For data validation, I'd consider going classic OOP by creating a Ticket class. Creating a new ticket would look like `newTicket = new Ticket(Connor, connor@email.com, description)`.
 
 ## Assumptions
 
 This application makes several assumptions, namely:
 
-- In order to keep down development time, I opted to stare application state in memory. This assumes that 1) data persistence is not important and 2) the machine can handle the load of however many accounts and event logs are created. One major way to improve this backend would be to create an external database to hold accounts and event logs.
+- In order to keep down development time, I opted to store application state in memory. This assumes that 1) data persistence is not important and 2) the machine can handle the load of however many accounts and event logs are created. One major way to improve this backend would be to create an external database to hold tickets.
 - The current implementation has no throttling, rate-liming, or load-balancing. This could lead to issues and low responsiveness with multiple concurrent requests.
 - The only way to interface with the admin panel is by entering `/admin` into the address bar. This assumes all users on the /admin page have legitimate access. For a real-life scenario, I would host the /admin on a separate domain (e.g. `admin.support-ticket.com`) and implement auth.
 - The app currently assumes that if a user creates a new ticket in the admin panel, they will not leave the email field blank.
