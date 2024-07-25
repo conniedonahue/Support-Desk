@@ -14,6 +14,11 @@ To run this server locally, do the following:
 6. _Open up the Admin Portal:_ Go to `localhost:{port}/admin`.
 7. _Play around with the Admin Portal:_ Edit, Delete, Respond, and Create New tickets.
 
+### Vercel Deployment
+
+As of July 25, 2025, the app is deployed through Vercel at: `https://support-desk-delta.vercel.app/`.
+Be sure to check out the admin page at `https://support-desk-delta.vercel.app/admin` and use the inspector to find some functional logs!
+
 ## Design considerations
 
 ### Frontend
