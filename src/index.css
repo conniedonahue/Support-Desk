@@ -448,3 +448,52 @@ i {
   justify-content: center;
   width: 100%;
 }
+
+/* Mobile-Friendly Settings */
+
+@media (max-width: 768px) {
+  #sidebar {
+    width: 20%;
+    min-width: 80px;
+    border-right: none;
+    border-bottom: solid 1px #e3e3e3;
+  }
+
+  #sidebar > * {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  #sidebar h1 {
+    padding: 0.5rem;
+    font-size: 0.875rem;
+  }
+
+  #sidebar > div {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  #sidebar nav {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  #detail {
+    padding: 1rem;
+    flex: 1;
+  }
+
+  #ticket {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .ticket-submit-form,
+  #edit-ticket-form,
+  #response-form {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
