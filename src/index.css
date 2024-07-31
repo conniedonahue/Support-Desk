@@ -474,9 +474,20 @@ i {
     padding-right: 0.5rem;
   }
 
+  #sidebar button {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+  }
+
   #sidebar nav {
     padding-left: 0.5rem;
     padding-right: 0.5rem;
+  }
+
+  #sidebar nav a {
+    font-size: 0.8rem;
+    white-space: normal;
+    word-wrap: break-word;
   }
 
   #detail {
