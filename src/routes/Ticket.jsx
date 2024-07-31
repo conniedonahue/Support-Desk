@@ -14,6 +14,18 @@ export default function Ticket() {
     return <div>Loading...</div>;
   }
 
+  const handleStatusChange = async (e) => {
+    const newStatus = e.target.value;
+    try {
+      const res = await axios.patch(`/api/tickets/${ticketId}`, {
+        status: newStatus,
+      });
+      setTicket(res.data);
+    } catch (error) {
+      console.error("Error updating status:", error);
+    }
+  };
+
   return (
     <div id="ticket">
       <div>
@@ -30,11 +42,26 @@ export default function Ticket() {
             </p>
           </>
         )}
-        {ticket.status && (
-          <p className="bold-label">
-            Status: <span className="answered-field"> {ticket.status} </span>
-          </p>
-        )}
+
+        <label>
+          <span className="bold-label">Status: </span>
+          <select
+            name="status"
+            value={ticket.status}
+            onChange={handleStatusChange}
+            className="status-select"
+          >
+            <option className="answered-field" value="NEW">
+              NEW
+            </option>
+            <option className="answered-field" value="IN PROGRESS">
+              IN PROGRESS
+            </option>
+            <option className="answered-field" value="RESOLVED">
+              RESOLVED
+            </option>
+          </select>
+        </label>
 
         <br></br>
 

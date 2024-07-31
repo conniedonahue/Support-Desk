@@ -46,6 +46,15 @@ router.put("/tickets/:id", (req, res) => {
   res.json(updatedTicket);
 });
 
+router.patch("/tickets/:id", (req, res) => {
+  const ticketId = parseInt(req.params.id);
+  const ticket = getTicket(ticketId);
+  if (!ticket) return res.status(404).send("Ticket not found");
+  const updatedTicket = updateTicket(ticketId, req.body);
+  console.log(`Ticket status updated: ${updatedTicket.status}`);
+  res.json(updatedTicket);
+});
+
 router.delete("/tickets/:id", (req, res) => {
   const ticketId = parseInt(req.params.id);
   const ticket = getTicket(ticketId);

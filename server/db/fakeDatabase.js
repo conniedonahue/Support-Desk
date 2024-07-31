@@ -35,7 +35,7 @@ const addTicket = (ticket) => {
 const updateTicket = (ticketId, newInfo) => {
   if (cache[ticketId]) {
     cache[ticketId] = { ...cache[ticketId], ...newInfo };
-    writeData(newInfo);
+    writeData(cache[ticketId]);
   }
   return cache[ticketId];
 };

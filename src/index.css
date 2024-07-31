@@ -298,6 +298,16 @@ i {
   background-color: darkgreen;
 }
 
+.status-select {
+  font-size: 1em;
+  padding: 0.5em;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  margin-bottom: 0.5em;
+  height: 2.5em;
+}
+
 .delete-button:hover {
   background-color: #880512;
 }
