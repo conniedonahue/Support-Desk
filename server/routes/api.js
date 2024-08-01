@@ -1,65 +1,35 @@
 import express from "express";
-import {
-  getTickets,
-  getTicket,
-  addTicket,
-  updateTicket,
-  deleteTicket,
-} from "../db/fakeDatabase.js";
+import { ticketController } from "../controllers/ticketController.js";
 
 const router = express.Router();
 router.use(express.json());
 
-router.get("/tickets", (req, res) => {
-  const tickets = getTickets();
+router.get("/tickets", ticketController.getAllTickets, (req, res) => {
+  const { tickets } = res.locals;
   res.json(tickets);
 });
 
-router.get("/tickets/:id", (req, res) => {
-  const ticketId = parseInt(req.params.id);
-  if (!ticketId) return res.status(404).send("Ticket not found");
-  const ticket = getTicket(ticketId);
+router.get("/tickets/:id", ticketController.getTicketById, (req, res) => {
+  const { ticket } = res.locals;
   res.json(ticket);
 });
 
-// Using simple counter as key for hashmap fakeDatabase.
-let id = 1;
-
-router.post("/tickets", (req, res) => {
-  const ticket = { id: id++, ...req.body, status: "NEW" };
-  addTicket(ticket);
-  console.log(`Ticket added to fake database: ${JSON.stringify(ticket)}`);
+router.post("/tickets", ticketController.createTicket, (req, res) => {
+  const { ticket } = res.locals;
   res.status(201).json(ticket);
 });
 
-router.put("/tickets/:id", (req, res) => {
-  const ticketId = parseInt(req.params.id);
-  const ticket = getTicket(ticketId);
-  if (!ticket) return res.status(404).send("Ticket not found");
-  const newInfo = {
-    name: req.body.name,
-    email: req.body.email,
-    status: req.body.status,
-    description: req.body.description,
-  };
-  const updatedTicket = updateTicket(ticketId, newInfo);
-  res.json(updatedTicket);
+router.put("/tickets/:id", ticketController.replaceTicket, (req, res) => {
+  const { updatedTicket } = res.locals;
+  res.status(201).json(updatedTicket);
 });
 
-router.patch("/tickets/:id", (req, res) => {
-  const ticketId = parseInt(req.params.id);
-  const ticket = getTicket(ticketId);
-  if (!ticket) return res.status(404).send("Ticket not found");
-  const updatedTicket = updateTicket(ticketId, req.body);
-  console.log(`Ticket status updated: ${updatedTicket.status}`);
-  res.json(updatedTicket);
+router.patch("/tickets/:id", ticketController.modifyTicket, (req, res) => {
+  const { modifiedTicket } = res.locals;
+  res.status(201).json(modifiedTicket);
 });
 
-router.delete("/tickets/:id", (req, res) => {
-  const ticketId = parseInt(req.params.id);
-  const ticket = getTicket(ticketId);
-  if (!ticket) return res.status(404).send("Ticket not found");
-  deleteTicket(ticketId);
+router.delete("/tickets/:id", ticketController.deleteTicket, (req, res) => {
   return res.status(200).json({ message: "Ticket deleted successfully" });
 });
 
