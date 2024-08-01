@@ -1,14 +1,39 @@
-import { Form, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Form, useParams, useLocation, useNavigate } from "react-router-dom";
+import { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 
 export default function Ticket() {
   const { ticketId } = useParams();
   const [ticket, setTicket] = useState(null);
+  const [updated, setUpdated] = useState(false);
+  const [responseSubmitted, setResponseSubmitted] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Handles Response notification and cleans up URL.
+  const handleResponseSubmitted = useCallback(
+    (searchParams) => {
+      setResponseSubmitted(true);
+      setTimeout(() => setResponseSubmitted(false), 3000);
+      searchParams.delete("responseSubmitted");
+      navigate(
+        location.pathname +
+          (searchParams.toString() ? `?${searchParams.toString()}` : ""),
+        { replace: true }
+      );
+    },
+    [location, navigate]
+  );
 
   useEffect(() => {
     axios.get(`/api/tickets/${ticketId}`).then((res) => setTicket(res.data));
-  }, [ticketId]);
+
+    // This is used for notifications activated by other routes
+    const searchParams = new URLSearchParams(location.search);
+    if (searchParams.get("responseSubmitted") === "true") {
+      handleResponseSubmitted(searchParams);
+    }
+  }, [ticketId, navigate, location, handleResponseSubmitted]);
 
   if (!ticket) {
     return <div>Loading...</div>;
@@ -21,6 +46,8 @@ export default function Ticket() {
         status: newStatus,
       });
       setTicket(res.data);
+      setUpdated(true);
+      setTimeout(() => setUpdated(false), 3000);
     } catch (error) {
       console.error("Error updating status:", error);
     }
@@ -63,7 +90,10 @@ export default function Ticket() {
           </select>
         </label>
 
-        <br></br>
+        <div className="notification-container">
+          {updated && <p>Status updated!</p>}
+          {responseSubmitted && <p>Response sent!</p>}
+        </div>
 
         {ticket.description && (
           <>

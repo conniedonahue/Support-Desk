@@ -4,7 +4,12 @@ export async function action({ request, params }) {
   const formData = await request.formData();
   const { response, email } = Object.fromEntries(formData);
   console.log(`Sent the following response to ${email}: ${response}`);
-  return redirect(`/admin/tickets/${params.ticketId}`);
+
+  // These searchParams are used for in-line notifications
+  const searchParams = new URLSearchParams({ responseSubmitted: "true" });
+  return redirect(
+    `/admin/tickets/${params.ticketId}?${searchParams.toString()}`
+  );
 }
 
 export default function Response() {

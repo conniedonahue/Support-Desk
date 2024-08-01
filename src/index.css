@@ -291,6 +291,13 @@ i {
   background-color: #0056b3;
 }
 
+.notification-container {
+  height: 1rem; /* Fixed height for the notification container */
+  display: flex;
+  align-items: center; /* Center align content vertically */
+  margin-bottom: 0.2rem; /* Space between notification and other content */
+}
+
 .respond-button {
   color: green;
 }
