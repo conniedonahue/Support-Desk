@@ -79,7 +79,10 @@ ticketController.replaceTicket = (req, res, next) => {
       email: req.body.email,
       status: req.body.status,
       description: req.body.description,
+<<<<<<< HEAD
       createdAt: req.body.createdAt,
+=======
+>>>>>>> 6f03a80 (Reorganize Backend with Controllers)
     };
     const updatedTicket = updateTicket(ticketId, newInfo);
     res.locals.updatedTicket = updatedTicket;
