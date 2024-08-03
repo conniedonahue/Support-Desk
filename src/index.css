@@ -380,6 +380,16 @@ i {
   resize: vertical;
 }
 
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+.button-group {
+  display: flex;
+  gap: 1em;
+}
+
 #edit-ticket-form button {
   padding: 0.5em 1em;
   border: none;
@@ -388,18 +398,25 @@ i {
   font-size: 1em;
   color: #007bff;
   background-color: white;
+  width: 100%;
 }
 
 #edit-ticket-form button:hover {
   background-color: #0056b3;
 }
 
-#edit-ticket-form button.cancel-button {
-  color: #b72c3a;
-  background-color: white;
+.cancel-button-form {
+  display: flex;
+  justify-content: flex-start;
 }
 
-#edit-ticket-form button.cancel-button:hover {
+#edit-ticket-form-cancel button.cancel-button {
+  color: #b72c3a;
+  background-color: white;
+  width: 100%;
+}
+
+#edit-ticket-form-cancel button.cancel-button:hover {
   background-color: #880512;
 }
 

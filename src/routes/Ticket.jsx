@@ -39,8 +39,6 @@ export default function Ticket() {
     return <div>Loading...</div>;
   }
 
-  console.log(ticket);
-
   const handleStatusChange = async (e) => {
     const newStatus = e.target.value;
     try {

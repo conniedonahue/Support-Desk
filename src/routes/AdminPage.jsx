@@ -4,6 +4,7 @@ import {
   useNavigation,
   useLoaderData,
   Form,
+  redirect,
 } from "react-router-dom";
 import "../index.css";
 import axios from "axios";
@@ -14,7 +15,7 @@ export async function action() {
     email: "",
     description: "",
   });
-  return { ticket };
+  return redirect(`/admin/tickets/${ticket.data.id}/edit`);
 }
 
 export default function AdminPage() {
