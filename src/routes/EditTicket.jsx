@@ -56,6 +56,12 @@ export default function EditTicket() {
           rows={6}
         />
       </label>
+      <input
+        type="hidden"
+        id="createdAt"
+        name="createdAt"
+        value={new Date().toISOString()}
+      />
       <p>
         <button type="submit">Save</button>
         <button type="button" className="cancel-button" onClick={handleCancel}>

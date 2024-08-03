@@ -39,6 +39,8 @@ export default function Ticket() {
     return <div>Loading...</div>;
   }
 
+  console.log(ticket);
+
   const handleStatusChange = async (e) => {
     const newStatus = e.target.value;
     try {
@@ -51,6 +53,18 @@ export default function Ticket() {
     } catch (error) {
       console.error("Error updating status:", error);
     }
+  };
+
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+    return date.toLocaleString("en-US", {
+      month: "long",
+      day: "numeric",
+      year: "numeric",
+      hour: "numeric",
+      minute: "numeric",
+      hour12: true,
+    });
   };
 
   return (
@@ -69,6 +83,12 @@ export default function Ticket() {
             </p>
           </>
         )}
+        <label>
+          <div>
+            <span className="bold-label">Created: </span>
+            <span>{formatDate(ticket.createdAt)}</span>
+          </div>
+        </label>
 
         <label>
           <span className="bold-label">Status: </span>
