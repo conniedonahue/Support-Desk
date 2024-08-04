@@ -291,11 +291,19 @@ i {
   background-color: #0056b3;
 }
 
+.hr-divider {
+  border: 0;
+  height: 1px;
+  background: #333;
+  background-image: linear-gradient(to right, #ccc, #333, #ccc);
+  margin: 1em 0;
+}
+
 .notification-container {
-  height: 1rem; /* Fixed height for the notification container */
+  height: 1rem;
   display: flex;
-  align-items: center; /* Center align content vertically */
-  margin-bottom: 0.2rem; /* Space between notification and other content */
+  align-items: center;
+  margin-bottom: 0.2rem;
 }
 
 .respond-button {

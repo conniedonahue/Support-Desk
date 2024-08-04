@@ -49,7 +49,7 @@ let id = 1;
 
 ticketController.createTicket = (req, res, next) => {
   try {
-    const ticket = { id: id++, ...req.body, status: "NEW" };
+    const ticket = { id: id++, ...req.body, status: "NEW", comments: [] };
     addTicket(ticket);
     console.log(`Ticket added to fake database: ${JSON.stringify(ticket)}`);
     res.locals.ticket = ticket;
@@ -80,6 +80,7 @@ ticketController.replaceTicket = (req, res, next) => {
       status: req.body.status,
       description: req.body.description,
       createdAt: req.body.createdAt,
+      comments: req.body.comments,
     };
     const updatedTicket = updateTicket(ticketId, newInfo);
     res.locals.updatedTicket = updatedTicket;
@@ -105,7 +106,6 @@ ticketController.modifyTicket = (req, res, next) => {
       });
     }
     const modifiedTicket = updateTicket(ticketId, req.body);
-    console.log(`Ticket status updated: ${modifiedTicket.status}`);
     res.locals.modifiedTicket = modifiedTicket;
     return next();
   } catch (err) {

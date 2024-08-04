@@ -5,6 +5,7 @@ export async function action({ request, params }) {
   const ticketId = params.ticketId;
   const formData = await request.formData();
   const updates = Object.fromEntries(formData);
+  updates.comments = JSON.parse(updates.comments);
   await axios.put(`/api/tickets/${ticketId}`, updates);
   return redirect(`/admin/tickets/${params.ticketId}`);
 }
@@ -60,6 +61,12 @@ export default function EditTicket() {
             id="createdAt"
             name="createdAt"
             value={new Date().toISOString()}
+          />
+          <input
+            type="hidden"
+            id="comments"
+            name="comments"
+            value={JSON.stringify([])}
           />
           <div className="button-group">
             <button type="submit">Save</button>
