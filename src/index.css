@@ -540,6 +540,11 @@ i {
 /* Mobile-Friendly Settings */
 
 @media (max-width: 768px) {
+  #MainPage-root {
+    padding: 1em;
+    box-sizing: border-box;
+  }
+
   #sidebar {
     width: 20%;
     height: 100vh;
