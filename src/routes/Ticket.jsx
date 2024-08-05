@@ -9,7 +9,7 @@ import {
 import { useEffect, useState, useCallback } from "react";
 import { formatDate } from "../../utils/dateUtils";
 import CommentSection from "../components/CommentSection";
-import { updateTicketStatus } from "../loaders/ticketLoader";
+import { updateTicketStatus } from "../actions/ticketActions";
 
 export default function Ticket() {
   const ticket = useLoaderData();
@@ -43,25 +43,28 @@ export default function Ticket() {
     }
   }, [location, handleResponseSubmitted]);
 
-  if (revalidator.state === "loading") {
-    return <div>Loading...</div>;
-  }
-
-  const handleStatusChange = async (e) => {
-    const newStatus = e.target.value;
-    try {
-      await updateTicketStatus(ticketId, newStatus);
-      setUpdated(true);
-      setTimeout(() => setUpdated(false), 3000);
-      revalidator.revalidate();
-    } catch (error) {
-      console.error("Error updating status:", error);
-    }
-  };
+  const handleStatusChange = useCallback(
+    async (e) => {
+      const newStatus = e.target.value;
+      try {
+        await updateTicketStatus(ticketId, newStatus);
+        setUpdated(true);
+        setTimeout(() => setUpdated(false), 3000);
+        revalidator.revalidate();
+      } catch (error) {
+        console.error("Error updating status:", error);
+      }
+    },
+    [ticketId, revalidator]
+  );
 
   const handleCommentSubmit = () => {
     revalidator.revalidate();
   };
+
+  if (revalidator.state === "loading") {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div id="ticket">
