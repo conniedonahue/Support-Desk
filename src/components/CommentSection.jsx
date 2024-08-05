@@ -40,7 +40,7 @@ export default function CommentSection({ ticket, onCommentSubmit }) {
 
   return (
     <div id="comments-section">
-      <h2 className="coments-header">Comments</h2>
+      <h2 className="comments-header">Comments</h2>
       <Form onSubmit={handleCommentSubmit} className="comment-button-form">
         <div className="comment-input-container">
           <textarea

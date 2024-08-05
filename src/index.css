@@ -542,9 +542,11 @@ i {
 @media (max-width: 768px) {
   #sidebar {
     width: 20%;
+    height: 100vh;
     min-width: 80px;
     border-right: none;
     border-bottom: solid 1px #e3e3e3;
+    overflow-y: auto;
   }
 
   #sidebar > * {
@@ -581,18 +583,47 @@ i {
   #detail {
     padding: 1rem;
     flex: 1;
+    overflow-y: auto;
+    height: 100vh;
   }
 
   #ticket {
     width: 100%;
-    padding: 1rem;
+    padding: 0;
   }
 
   .ticket-submit-form,
   #edit-ticket-form,
   #response-form {
     width: 100%;
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding: 0;
+  }
+
+  #comments-section {
+    width: 100%;
+  }
+
+  .comments-header {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1.5em;
+  }
+
+  .comment-text-field {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .comment-button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .comment-name-field {
+    flex-grow: 1;
+    width: 100%;
+    margin-bottom: 0;
   }
 }
