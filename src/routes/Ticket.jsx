@@ -115,11 +115,6 @@ export default function Ticket() {
         )}
 
         <div className="button-group">
-          <Form action="edit">
-            <button type="submit" className="edit-button">
-              Edit
-            </button>
-          </Form>
           <Form action="respond">
             <button type="submit" className="respond-button">
               Respond
@@ -141,37 +136,7 @@ export default function Ticket() {
         </div>
       </div>
       <hr className="hr-divider" />
-      <CommentSection
-        ticket={ticket}
-        onCommentSubmit={handleCommentSubmit}
-      />
-      {/* <Form
-        id="edit-ticket-form-comment"
-        method="post"
-        className="comment-button-form"
-        action={`/admin/tickets/${ticket.id}/comment`}
-      >
-        <textarea name="comment" placeholder="Write a comment..." required />
-        <input type="text" name="name" placeholder="Your name" required />
-        <input type="hidden" />
-        <button type="submit" className="comment-button">
-          Leave Comment
-        </button>
-      </Form>
-
-      {ticket.comments && ticket.comments.length > 0 && (
-        <div className="comments-section">
-          <h2>Comments</h2>
-          {ticket.comments.map((c, index) => (
-            <div key={index} className="comment">
-              <p>
-                <strong>{c.postedBy}</strong> ({formatDate(c.time)})
-              </p>
-              <p>{c.comment}</p>
-            </div>
-          ))}
-        </div>
-      )} */}
+      <CommentSection ticket={ticket} onCommentSubmit={handleCommentSubmit} />
     </div>
   );
 }
