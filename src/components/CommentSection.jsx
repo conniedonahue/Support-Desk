@@ -1,7 +1,8 @@
-import { Form, useParams } from "react-router-dom";
+import { Form } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { formatDate } from "../../utils/dateUtils";
+import PropTypes from "prop-types";
 
 export default function CommentSection({ ticket, onCommentSubmit }) {
   const [commentText, setCommentText] = useState("");
@@ -84,3 +85,23 @@ export default function CommentSection({ ticket, onCommentSubmit }) {
     </div>
   );
 }
+
+CommentSection.propTypes = {
+  ticket: PropTypes.objectOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      email: PropTypes.string,
+      description: PropTypes.string,
+      status: PropTypes.string,
+      comments: PropTypes.arrayOf(
+        PropTypes.shape({
+          postedBy: PropTypes.string,
+          time: PropTypes.string,
+          comment: PropTypes.string,
+        })
+      ),
+    })
+  ),
+  onCommentSubmit: PropTypes.func,
+};
