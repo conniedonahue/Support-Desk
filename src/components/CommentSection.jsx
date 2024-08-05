@@ -39,31 +39,38 @@ export default function CommentSection({ ticket, onCommentSubmit }) {
   };
 
   return (
-    <div className="comments-section">
+    <div id="comments-section">
+      <h2 className="coments-header">Comments</h2>
       <Form onSubmit={handleCommentSubmit} className="comment-button-form">
-        <textarea
-          name="commentText"
-          placeholder="Write a comment..."
-          value={commentText}
-          onChange={(e) => setCommentText(e.target.value)}
-          required
-        />
-        <input
-          type="text"
-          name="name"
-          placeholder="Your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <button type="submit" className="comment-button">
-          Leave Comment
-        </button>
+        <div className="comment-input-container">
+          <textarea
+            name="commentText"
+            className="comment-text-field"
+            placeholder="Write a comment..."
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
+            required
+          />
+          <div className="comment-button-container">
+            <input
+              type="text"
+              name="name"
+              className="comment-name-field"
+              placeholder="Your name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+
+            <button type="submit" className="comment-button">
+              Comment
+            </button>
+          </div>
+        </div>
       </Form>
 
       {commentList && commentList.length > 0 && (
         <div className="comments-list">
-          <h2>Comments</h2>
           {sortedComments.map((c, index) => (
             <div key={index} className="comment">
               <p>
