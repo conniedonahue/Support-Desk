@@ -1,5 +1,5 @@
 import { useState } from "react";
-import axios from "axios";
+import { submitTicket } from "../actions/mainPageActions";
 
 const MainPage = () => {
   const [form, setForm] = useState({
@@ -13,12 +13,8 @@ const MainPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const currentDatetime = new Date().toISOString();
-      const res = await axios.post("/api/tickets", {
-        ...form,
-        createdAt: currentDatetime,
-      });
-      console.log("Ticket submitted:", res.data);
+      const newTicket = await submitTicket(form);
+      console.log("Ticket submitted:", newTicket);
       setForm({ name: "", email: "", description: "", createdAt: "" });
       setSubmitted(true);
       setTimeout(() => setSubmitted(false), 3000);

@@ -12,6 +12,7 @@ import { action as destroyAction } from "./routes/DestroyTicket.jsx";
 import { loader as responseLoader } from "./loaders/responseLoader.js";
 import { loader as adminPageLoader } from "./loaders/adminPageLoader.js";
 import { loader as editLoader } from "./loaders/editPageLoader.js";
+import { loader as ticketLoader } from "./loaders/ticketLoader.js";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,7 @@ const router = createBrowserRouter([
       {
         path: "tickets/:ticketId",
         element: <Ticket />,
+        loader: ticketLoader,
       },
       {
         path: "tickets/:ticketId/edit",

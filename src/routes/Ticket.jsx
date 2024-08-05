@@ -1,12 +1,20 @@
-import { Form, useParams, useLocation, useNavigate } from "react-router-dom";
+import {
+  Form,
+  useParams,
+  useLocation,
+  useNavigate,
+  useLoaderData,
+  useRevalidator,
+} from "react-router-dom";
 import { useEffect, useState, useCallback } from "react";
-import axios from "axios";
 import { formatDate } from "../../utils/dateUtils";
 import CommentSection from "../components/CommentSection";
+import { updateTicketStatus } from "../loaders/ticketLoader";
 
 export default function Ticket() {
+  const ticket = useLoaderData();
+  const revalidator = useRevalidator();
   const { ticketId } = useParams();
-  const [ticket, setTicket] = useState(null);
   const [updated, setUpdated] = useState(false);
   const [responseSubmitted, setResponseSubmitted] = useState(false);
   const location = useLocation();
@@ -28,35 +36,31 @@ export default function Ticket() {
   );
 
   useEffect(() => {
-    axios.get(`/api/tickets/${ticketId}`).then((res) => setTicket(res.data));
-
     // This is used for notifications activated by other routes
     const searchParams = new URLSearchParams(location.search);
     if (searchParams.get("responseSubmitted") === "true") {
       handleResponseSubmitted(searchParams);
     }
-  }, [ticketId, navigate, location, handleResponseSubmitted]);
+  }, [location, handleResponseSubmitted]);
 
-  if (!ticket) {
+  if (revalidator.state === "loading") {
     return <div>Loading...</div>;
   }
 
   const handleStatusChange = async (e) => {
     const newStatus = e.target.value;
     try {
-      const res = await axios.patch(`/api/tickets/${ticketId}`, {
-        status: newStatus,
-      });
-      setTicket(res.data);
+      await updateTicketStatus(ticketId, newStatus);
       setUpdated(true);
       setTimeout(() => setUpdated(false), 3000);
+      revalidator.revalidate();
     } catch (error) {
       console.error("Error updating status:", error);
     }
   };
 
-  const handleCommentSubmit = (updatedTicket) => {
-    setTicket(updatedTicket);
+  const handleCommentSubmit = () => {
+    revalidator.revalidate();
   };
 
   return (
