@@ -56,10 +56,6 @@ button:active {
   transform: translateY(1px);
 }
 
-/* form[action$="destroy"] button {
-  color: #f44250;
-} */
-
 .sr-only {
   position: absolute;
   width: 1px;

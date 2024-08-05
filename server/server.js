@@ -15,7 +15,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 // app.use(express.static(__dirname + "/public/"));
 
-//set up the router here for '/
 app.use("/api", apiRouter);
 
 if (process.env.NODE_ENV === "production") {
